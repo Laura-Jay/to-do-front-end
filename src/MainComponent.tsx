@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { ChangeEventHandler, FormEvent, useState } from "react";
 import Task from "./Task";
-import taskData from "./taskData.json";
+// import taskData from "./taskData.json";
 
 // const axios = require('axios').default;
 
@@ -11,16 +11,20 @@ interface TaskInterface {
   dueDate: string;
   taskType: string;
   created: string;
+  complete: boolean;
 }
 
 export default function MainComponent(): JSX.Element {
+
+
   const [formData, setFormData] = useState({
     id: 1,
     taskName: "",
     taskDescription: "",
     dueDate: "",
-    taskType: "",
+    taskType: "work",
     created: new Date().toJSON().slice(0, 10),
+    complete: false
   });
 
   function handleFormChange(event: any) {
@@ -28,7 +32,7 @@ export default function MainComponent(): JSX.Element {
     setFormData((prevFormData) => {
       return {
         ...prevFormData,
-        [name]: type === "radio" ? checked : value,
+        [name]: type === "checkbox" ? checked : value,
       };
     });
   }
@@ -37,28 +41,41 @@ export default function MainComponent(): JSX.Element {
 
   const addTask = (taskInfo: TaskInterface) => {
     setTaskList([...taskList, taskInfo]);
+    console.log(taskInfo.id)
   };
 
   function handleSubmit(event: any) {
     event.preventDefault();
     addTask(formData);
     setFormData({
-      id: formData.id++,
+      id: formData.id+1,
       taskName: "",
       taskDescription: "",
       dueDate: "",
-      taskType: "",
+      taskType: "work",
       created: new Date().toJSON().slice(0, 10),
+      complete: false
     });
   }
 
-  const taskListItems = taskList.map((data) => {
+  const incompleteTaskList = taskList.filter(removeComplete)
+
+  function removeComplete(taskInfo: TaskInterface) {
+    if (taskInfo.complete === false){
+      return taskInfo;
+    }
+  }
+
+  const taskListItems = incompleteTaskList.map((data) => {
     return (
       <Task
         key={data.id}
+        id={data.id}
         taskName={data.taskName}
         dueDate={data.dueDate}
         created={data.created}
+        taskType={data.taskType}
+        complete={data.complete}
       />
     );
   });

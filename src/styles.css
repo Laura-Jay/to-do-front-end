@@ -43,7 +43,7 @@
   list-style: none;
   display: flex;
   flex-direction: row;
-  gap: 50px;
+  gap: 100px;
   justify-content: center;
 }
 
@@ -60,13 +60,21 @@
   padding: 30px;
   display: flex;
   flex-direction: row;
-  width: 300px;
+  width: 600px;
   justify-content: space-between;
   font-size: 12px;
   color: white;
   align-items: center;
   text-align: center;
   letter-spacing: 0.3px;
+}
+
+.personal {
+    background-color: darkslategrey;
+}
+
+.work {
+    background-color: darkslateblue;
 }
 
 .task-form {
