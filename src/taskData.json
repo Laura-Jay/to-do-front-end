@@ -1,0 +1,29 @@
+[
+  {
+    "id": "1",
+    "taskName": "Build UI",
+    "taskDescription": "Create website layout in bubble.",
+    "dueDate": "02/04/2022",
+    "created": "01/04/2022",
+    "taskType": "work",
+    "complete": false
+  },
+  {
+    "id": "2",
+    "taskName": "Build Front End",
+    "taskDescription": "Create app in react.",
+    "dueDate": "03/04/2022",
+    "created": "01/04/2022",
+    "taskType": "work",
+    "complete": false
+  },
+  {
+    "id": "3",
+    "taskName": "Play with Dante",
+    "taskDescription": "Give kitty a good play session so she is not fussy.",
+    "dueDate": "01/04/2022",
+    "created": "01/04/2022",
+    "taskType": "personal",
+    "complete": false
+  }
+]
