@@ -22,7 +22,7 @@ export default function MainComponent(): JSX.Element {
     taskName: "",
     taskDescription: "",
     dueDate: "",
-    taskType: "work",
+    taskType: "",
     created: new Date().toJSON().slice(0, 10),
     complete: false
   });
@@ -41,7 +41,6 @@ export default function MainComponent(): JSX.Element {
 
   const addTask = (taskInfo: TaskInterface) => {
     setTaskList([...taskList, taskInfo]);
-    console.log(taskInfo.id)
   };
 
   function handleSubmit(event: any) {
@@ -52,11 +51,19 @@ export default function MainComponent(): JSX.Element {
       taskName: "",
       taskDescription: "",
       dueDate: "",
-      taskType: "work",
+      taskType: "",
       created: new Date().toJSON().slice(0, 10),
       complete: false
     });
+    setView("")
   }
+
+  const [view, setView] = useState("");
+
+  function handleNewTask() {
+    setView("newTask")
+  }
+
 
   const incompleteTaskList = taskList.filter(removeComplete)
 
@@ -83,7 +90,10 @@ export default function MainComponent(): JSX.Element {
   return (
     <>
       <div className="button-bar">
-        <button className="button-bar--start">Add ToDo</button>
+        <button 
+        className="button-bar--start"
+        onClick={handleNewTask}
+        >Add ToDo</button>
         <button className="button-bar--middle">Over-Due Tasks</button>
         <button className="button-bar--end">All Tasks</button>
       </div>
@@ -95,7 +105,7 @@ export default function MainComponent(): JSX.Element {
         <li>CREATED</li>
       </ul>
       <div className="task-list">{taskListItems}</div>
-      <form className="task-form" onSubmit={handleSubmit}>
+      {view === "newTask" && <form className="task-form" onSubmit={handleSubmit}>
         <label htmlFor="task-name">Task:</label>
         <input
           id="task-name"
@@ -153,7 +163,7 @@ export default function MainComponent(): JSX.Element {
           <label htmlFor="work">Work</label>
         </fieldset>
         <button>Submit Task</button>
-      </form>
+      </form>}
     </>
   );
 }
